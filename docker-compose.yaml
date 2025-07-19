@@ -16,7 +16,7 @@ services:
     image: redis:7.0
     container_name: redis
   user:
-    image: kusumasoumya/redis:v1
+    image: kusumasoumya/user:v1
     container_name: user
     depends_on:
     - redis
