@@ -3,10 +3,17 @@ networks:
     driver: bridge
     name: roboshop
     #external: true #I created network already using docker network create roboshop
+  volumes:
+  - mongodb
+  - redis
+  - mysql
+  - rabbitmq # this is equal to docker volume create rabbitmq
 services:
   mongodb:
     image: kusumasoumya/mongodb:v1
     container_name: mongodb
+    volumes:
+    - mongodb:/data/db     #volume_name:path where data is stored(this will get from docker hub documentation)
   catalogue:
     image: kusumasoumya/catalogue:v1
     container_name: catalogue
@@ -15,6 +22,8 @@ services:
   redis:
     image: redis:7.0
     container_name: redis
+    volumes:
+    - redis:/data
   user:
     image: kusumasoumya/user:v1
     container_name: user
@@ -30,6 +39,8 @@ services:
   mysql:
     image: kusumasoumya/mysql:v1
     container_name: mysql
+    volumes:
+    - mysql:/var/lib/mysql
   shipping:
     image: kusumasoumya/shipping:v1
     container_name: shipping
@@ -42,6 +53,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
+    volumes:
+    - rabbitmq:/var/lib/rabbitmq
   payment:
     image: kusumasoumya/payment:v1
     container_name: payment
