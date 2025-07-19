@@ -4,10 +4,10 @@ networks:
     name: roboshop
     #external: true #I created network already using docker network create roboshop
 volumes:
-  mongodb
-  redis
-  mysql
-  rabbitmq # this is equal to docker volume create rabbitmq
+  mongodb:
+  redis:
+  mysql:
+  rabbitmq: # this is equal to docker volume create rabbitmq
 services:
   mongodb:
     image: kusumasoumya/mongodb:v1
